@@ -17,7 +17,7 @@ export class AppController {
     return this.appService.findAll();
   }
 
-  @Get('memos/:id')
+  @Get(':id')
   async findOne(@Param('id') id: string): Promise<Memo> {
     return this.appService.findOne(id);
   }

@@ -23,6 +23,6 @@ export class AppService {
   }
 
   async findOne(id: string): Promise<Memo> {
-    return this.memoModel.findOne({ _id: id }).exec();
+    return this.catModel.findOne({ _id: id }).exec();
   }
 }

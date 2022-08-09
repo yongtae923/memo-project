@@ -22,7 +22,7 @@ export class AppService {
     return createdMemo;
   }
 
-  async findOne(id: string): Promise<Memo> {
-    return this.memoModel.findOne({ _id: id }).exec();
+  async findOne(id: string): Promise<Cat> {
+    return this.catModel.findOne({ _id: id }).exec();
   }
 }

@@ -17,13 +17,13 @@ export class AppController {
     return this.appService.findAll();
   }
 
-  @Get('memos/:id')
-  async findOne(@Param('id') id: string): Promise<Memo> {
-    return this.appService.findOne(id);
-  }
-
   @Post('memos')
   async create(@Body() postMemoDto: PostMemoDto) {
     return await this.appService.create(postMemoDto);
+  }
+
+  @Get(':id')
+  async findOne(@Param('id') id: string): Promise<Memo> {
+    return this.appService.findOne(id);
   }
 }

@@ -16,8 +16,8 @@ export class AppController {
   async findAll(): Promise<Memo[]> {
     return this.appService.findAll();
   }
-
-  @Get('memos/:id')
+  
+  @Get(':id')
   async findOne(@Param('id') id: string): Promise<Memo> {
     return this.appService.findOne(id);
   }
@@ -26,4 +26,5 @@ export class AppController {
   async create(@Body() postMemoDto: PostMemoDto) {
     return await this.appService.create(postMemoDto);
   }
+
 }
