@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { PostMemoDto } from './dto/post-memo.dto';
+import * as postMemoDto from './dto/post-memo.dto';
 import { Memo, MemoDocument } from './schemas/memo.schema';
 @Injectable()
 export class AppService {
@@ -17,8 +17,8 @@ export class AppService {
     return this.memoModel.find().exec();
   }
 
-  async create(PostMemoDto: PostMemoDto): Promise<Memo> {
-    const createdMemo = await this.memoModel.create(PostMemoDto);
-    return createdMemo;
+  async create(createCatDto: CreateCatDto): Promise<Cat> {
+    const createdCat = await this.catModel.create(createCatDto);
+    return createdCat;
   }
 }

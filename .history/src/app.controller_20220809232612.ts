@@ -13,12 +13,12 @@ export class AppController {
   }
 
   @Get('memos')
-  async findAll(): Promise<Memo[]> {
+  async GetAll(): Promise<Memo[]> {
     return this.appService.findAll();
   }
 
-  @Post('memos')
+  @Post()
   async create(@Body() postMemoDto: PostMemoDto) {
-    return await this.appService.create(postMemoDto);
+    await this.appService.create(createCatDto);
   }
 }

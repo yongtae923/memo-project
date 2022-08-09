@@ -13,7 +13,7 @@ export class AppController {
   }
 
   @Get('memos')
-  async findAll(): Promise<Memo[]> {
+  async GetAll(): Promise<Memo[]> {
     return this.appService.findAll();
   }
 

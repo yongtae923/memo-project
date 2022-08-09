@@ -18,7 +18,7 @@ export class AppService {
   }
 
   async create(PostMemoDto: PostMemoDto): Promise<Memo> {
-    const createdMemo = await this.memoModel.create(PostMemoDto);
-    return createdMemo;
+    const createdCat = await this.memoModel.create(post);
+    return createdCat;
   }
 }
