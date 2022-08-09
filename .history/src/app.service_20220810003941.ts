@@ -26,10 +26,7 @@ export class AppService {
     return createdMemo;
   }
 
-  async edit(id: string, postMemoDto: PostMemoDto): Promise<Memo> {
-    const updatedMemo = await this.memoModel
-      .findByIdAndUpdate(id, postMemoDto)
-      .exec();
-    return updatedMemo;
+  async edit(id: string, postMemoDto: PostMemoDto): Promise {
+    await this.memoModel.findByIdAndUpdate(id, postMemoDto).exec();
   }
 }

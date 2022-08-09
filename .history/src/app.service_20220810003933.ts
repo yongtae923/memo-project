@@ -3,6 +3,8 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { PostMemoDto } from './dto/post-memo.dto';
 import { Memo, MemoDocument } from './schemas/memo.schema';
+type NewType = Promise<Memo>;
+
 @Injectable()
 export class AppService {
   constructor(
@@ -26,10 +28,7 @@ export class AppService {
     return createdMemo;
   }
 
-  async edit(id: string, postMemoDto: PostMemoDto): Promise<Memo> {
-    const updatedMemo = await this.memoModel
-      .findByIdAndUpdate(id, postMemoDto)
-      .exec();
-    return updatedMemo;
+  async edit(id: string, postMemoDto: PostMemoDto): NewType {
+    await this.memoModel.findByIdAndUpdate(id, postMemoDto).exec();
   }
 }

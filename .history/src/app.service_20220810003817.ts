@@ -30,6 +30,6 @@ export class AppService {
     const updatedMemo = await this.memoModel
       .findByIdAndUpdate(id, postMemoDto)
       .exec();
-    return updatedMemo;
+    return postMemoDto;
   }
 }

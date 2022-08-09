@@ -1,13 +1,5 @@
 import { AppService } from './app.service';
-import {
-  Body,
-  Controller,
-  Delete,
-  Get,
-  Param,
-  Post,
-  Put,
-} from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
 import { Memo } from './schemas/memo.schema';
 import { PostMemoDto } from './dto/post-memo.dto';
 
@@ -35,8 +27,7 @@ export class AppController {
     return await this.appService.create(postMemoDto);
   }
 
-  @Put('memos/:id')
-  async edit(@Param('id') id: string, @Body() postMemoDto: PostMemoDto) {
+  async edit(@Param('id') id: string, @Body() postMemoDto: PostMemoDto){
     return await this.appService.edit(id, postMemoDto);
   }
 }

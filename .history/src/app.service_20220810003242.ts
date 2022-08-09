@@ -22,14 +22,11 @@ export class AppService {
   }
 
   async create(postMemoDto: PostMemoDto): Promise<Memo> {
-    const createdMemo = await this.memoModel.create(postMemoDto);
+    const createdMemo = await this.memoModel.create(PostMemoDto);
     return createdMemo;
   }
 
-  async edit(id: string, postMemoDto: PostMemoDto): Promise<Memo> {
-    const updatedMemo = await this.memoModel
-      .findByIdAndUpdate(id, postMemoDto)
-      .exec();
-    return updatedMemo;
+  async edit(id: string, content: string): Promise<Memo> {
+    const a = await this.memoModel.findOne({ _id: id }).exec();
   }
 }

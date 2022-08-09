@@ -37,6 +37,6 @@ export class AppController {
 
   @Put('memos/:id')
   async edit(@Param('id') id: string, @Body() postMemoDto: PostMemoDto) {
-    return await this.appService.edit(id, postMemoDto);
+    return await this.appService.edit({ id, postMemoDto });
   }
 }
