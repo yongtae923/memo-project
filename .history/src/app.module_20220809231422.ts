@@ -9,7 +9,6 @@ import { Memo, MemoSchema } from './schemas/memo.schema';
     MongooseModule.forRoot(
       'mongodb+srv://yongtae:yongtae@cluster0.4jd66xe.mongodb.net/?retryWrites=true&w=majority',
     ),
-    MongooseModule.forFeature([{ name: Memo.name, schema: MemoSchema }]),
   ],
   controllers: [AppController],
   providers: [AppService],

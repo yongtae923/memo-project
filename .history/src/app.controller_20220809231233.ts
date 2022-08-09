@@ -10,9 +10,4 @@ export class AppController {
   getHello(): string {
     return this.appService.getHello();
   }
-
-  @Get('memos')
-  async GetAll(): Promise<Memo[]> {
-    return this.appService.findAll();
-  }
 }

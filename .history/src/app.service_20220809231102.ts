@@ -4,15 +4,11 @@ import { Model } from 'mongoose';
 import { Memo, MemoDocument } from './schemas/memo.schema';
 @Injectable()
 export class AppService {
-  constructor(
-    @InjectModel(Memo.name) private readonly memoModel: Model<MemoDocument>,
-  ) {}
-
   getHello(): string {
     return 'Hello World!';
   }
 
   async findAll(): Promise<Memo[]> {
-    return this.memoModel.find().exec();
+    return this.catModel.find().exec();
   }
 }
