@@ -1,6 +1,6 @@
 import { AppService } from './app.service';
 import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
-import { Memo } from './schemas/memo.schema';
+import { Memo } from './schemas/cat.schema';
 
 @Controller()
 export class AppController {
@@ -9,10 +9,5 @@ export class AppController {
   @Get()
   getHello(): string {
     return this.appService.getHello();
-  }
-
-  @Get('memos')
-  async GetAll(): Promise<Memo[]> {
-    return this.appService.findAll();
   }
 }

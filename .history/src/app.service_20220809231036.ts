@@ -1,18 +1,16 @@
+32 lines (27 sloc) 866 Bytes
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { Memo, MemoDocument } from './schemas/memo.schema';
+import { CreateCatDto } from './dto/create-cat.dto';
+import { Cat, CatDocument } from './schemas/cat.schema';
 @Injectable()
 export class AppService {
-  constructor(
-    @InjectModel(Memo.name) private readonly memoModel: Model<MemoDocument>,
-  ) {}
-
   getHello(): string {
     return 'Hello World!';
   }
 
   async findAll(): Promise<Memo[]> {
-    return this.memoModel.find().exec();
+    return this.catModel.find().exec();
   }
 }

@@ -2,7 +2,7 @@ import { AppService } from './app.service';
 import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
 import { Memo } from './schemas/memo.schema';
 
-@Controller()
+@Controller('memo')
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
@@ -11,8 +11,8 @@ export class AppController {
     return this.appService.getHello();
   }
 
-  @Get('memos')
-  async GetAll(): Promise<Memo[]> {
+  @Get()
+  async findAll(): Promise<Memo[]> {
     return this.appService.findAll();
   }
 }

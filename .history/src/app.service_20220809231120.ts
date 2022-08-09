@@ -5,7 +5,7 @@ import { Memo, MemoDocument } from './schemas/memo.schema';
 @Injectable()
 export class AppService {
   constructor(
-    @InjectModel(Memo.name) private readonly memoModel: Model<MemoDocument>,
+    @InjectModel(Cat.name) private readonly catModel: Model<CatDocument>,
   ) {}
 
   getHello(): string {
