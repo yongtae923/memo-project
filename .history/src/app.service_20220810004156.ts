@@ -38,5 +38,4 @@ export class AppService {
       .findByIdAndRemove({ _id: id })
       .exec();
     return deletedMemo;
-  }
 }

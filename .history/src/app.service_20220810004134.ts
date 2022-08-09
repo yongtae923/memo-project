@@ -34,9 +34,8 @@ export class AppService {
   }
 
   async delete(id: string) {
-    const deletedMemo = await this.memoModel
+    const deletedCat = await this.catModel
       .findByIdAndRemove({ _id: id })
       .exec();
-    return deletedMemo;
-  }
+    return deletedCat;
 }

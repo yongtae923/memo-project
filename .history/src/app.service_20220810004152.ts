@@ -37,6 +37,5 @@ export class AppService {
     const deletedMemo = await this.memoModel
       .findByIdAndRemove({ _id: id })
       .exec();
-    return deletedMemo;
-  }
+    return delete;
 }

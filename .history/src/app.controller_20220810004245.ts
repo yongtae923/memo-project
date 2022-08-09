@@ -40,7 +40,7 @@ export class AppController {
     return await this.appService.edit(id, postMemoDto);
   }
 
-  @Delete('memos/:id')
+  @Delete(':id')
   async delete(@Param('id') id: string) {
     return this.appService.delete(id);
   }
