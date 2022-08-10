@@ -10,7 +10,6 @@ import {
 } from '@nestjs/common';
 import { Memo } from './schemas/memo.schema';
 import { PostMemoDto } from './dto/post-memo.dto';
-import { PostAccountDto } from './dto/post-account.dto';
 
 @Controller()
 export class AppController {
@@ -46,8 +45,8 @@ export class AppController {
     return this.appService.delete(id);
   }
 
-  @Post('accounts')
-  async join(@Body() postAccountDto: PostAccountDto) {
-    return await this.appService.join(postAccountDto);
+  @Post('memos')
+  async create(@Body() postMemoDto: PostMemoDto) {
+    return await this.appService.create(postMemoDto);
   }
 }

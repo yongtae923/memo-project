@@ -2,15 +2,11 @@ import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { PostMemoDto } from './dto/post-memo.dto';
-import { PostAccountDto } from './dto/post-account.dto';
 import { Memo, MemoDocument } from './schemas/memo.schema';
-import { Account, AccountDocument } from './schemas/account.schema';
 @Injectable()
 export class AppService {
   constructor(
     @InjectModel(Memo.name) private readonly memoModel: Model<MemoDocument>,
-    @InjectModel(Account.name)
-    private readonly accountModel: Model<AccountDocument>,
   ) {}
 
   getHello(): string {
@@ -44,8 +40,5 @@ export class AppService {
     return deletedMemo;
   }
 
-  async join(postAccountDto: PostAccountDto): Promise<Account> {
-    const createdMemo = await this.accountModel.create(postAccountDto);
-    return createdMemo;
-  }
+  async join
 }

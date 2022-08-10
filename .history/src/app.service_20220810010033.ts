@@ -8,9 +8,8 @@ import { Account, AccountDocument } from './schemas/account.schema';
 @Injectable()
 export class AppService {
   constructor(
-    @InjectModel(Memo.name) private readonly memoModel: Model<MemoDocument>,
-    @InjectModel(Account.name)
-    private readonly accountModel: Model<AccountDocument>,
+    @InjectModel(Memo.name) private readonly memoModel: Model<MemoDocument>,    @InjectModel(Memo.name) private readonly memoModel: Model<MemoDocument>,
+
   ) {}
 
   getHello(): string {

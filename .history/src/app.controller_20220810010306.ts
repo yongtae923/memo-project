@@ -9,6 +9,7 @@ import {
   Put,
 } from '@nestjs/common';
 import { Memo } from './schemas/memo.schema';
+import { Account } from './schemas/account.schema';
 import { PostMemoDto } from './dto/post-memo.dto';
 import { PostAccountDto } from './dto/post-account.dto';
 

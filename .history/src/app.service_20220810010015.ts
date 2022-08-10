@@ -9,8 +9,6 @@ import { Account, AccountDocument } from './schemas/account.schema';
 export class AppService {
   constructor(
     @InjectModel(Memo.name) private readonly memoModel: Model<MemoDocument>,
-    @InjectModel(Account.name)
-    private readonly accountModel: Model<AccountDocument>,
   ) {}
 
   getHello(): string {
