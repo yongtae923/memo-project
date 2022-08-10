@@ -4,12 +4,7 @@ import { AppService } from './app.service';
 import { MongooseModule } from '@nestjs/mongoose';
 import { Memo, MemoSchema } from './schemas/memo.schema';
 import { Account, AccountSchema } from './schemas/account.schema';
-import { JwtModule } from '@nestjs/jwt';
-import { PassportModule } from '@nestjs/passport';
-import { AuthService } from './auth/auth.service';
-import { jwtConstants } from './auth/constants';
-import { JwtStrategy } from './auth/strategies/jwt.strategy';
-import { LocalStrategy } from './auth/strategies/local.strategy';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -18,13 +13,20 @@ import { LocalStrategy } from './auth/strategies/local.strategy';
     ),
     MongooseModule.forFeature([{ name: Memo.name, schema: MemoSchema }]),
     MongooseModule.forFeature([{ name: Account.name, schema: AccountSchema }]),
+    AuthModule,
+  ],
+  controllers: [AppController],
+  providers: [AppService],
+
+  imports: [
+    AppModule,
     PassportModule,
     JwtModule.register({
       secret: jwtConstants.secret,
       signOptions: { expiresIn: '60s' },
     }),
   ],
-  controllers: [AppController],
-  providers: [AppService, AuthService, LocalStrategy, JwtStrategy],
+  providers: [AuthService, LocalStrategy, JwtStrategy],
+  exports: [AuthService],
 })
 export class AppModule {}

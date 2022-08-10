@@ -11,17 +11,10 @@ import {
 import { Memo } from './schemas/memo.schema';
 import { MemoDto } from './dto/memo.dto';
 import { AccountDto } from './dto/account.dto';
-import { Request, UseGuards } from '@nestjs/common';
-import { AuthService } from './auth/auth.service';
-import { JwtAuthGuard } from './auth/guards/jwt-auth.guard';
-import { LocalAuthGuard } from './auth/guards/local-auth.guard';
 
 @Controller()
 export class AppController {
-  constructor(
-    private readonly appService: AppService,
-    private readonly authService: AuthService,
-  ) {}
+  constructor(private readonly appService: AppService) {}
 
   @Get()
   getHello(): string {
@@ -55,24 +48,11 @@ export class AppController {
 
   @Get('accounts')
   async accounts() {
-    return await this.appService.accountAll();
+    return await this.appService.accountsAll();
   }
 
   @Post('accounts')
-  async join(@Body() accountDto: AccountDto) {
-    return await this.appService.join(accountDto);
-  }
-
-  @Post('auth/login')
-  async login(
-    @Body() accountDto: AccountDto,
-  ): Promise<{ access_token: string }> {
-    return this.authService.login(accountDto);
-  }
-
-  @UseGuards(JwtAuthGuard)
-  @Get('profile')
-  getProfile(@Request() req): any {
-    return req.user;
+  async join(@Body() postAccountDto: AccountDto) {
+    return await this.appService.join(postAccountDto);
   }
 }

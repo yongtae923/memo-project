@@ -4,6 +4,7 @@ import { AppService } from './app.service';
 import { MongooseModule } from '@nestjs/mongoose';
 import { Memo, MemoSchema } from './schemas/memo.schema';
 import { Account, AccountSchema } from './schemas/account.schema';
+import { AuthModule } from './auth/auth.module';
 import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
 import { AuthService } from './auth/auth.service';
@@ -18,6 +19,7 @@ import { LocalStrategy } from './auth/strategies/local.strategy';
     ),
     MongooseModule.forFeature([{ name: Memo.name, schema: MemoSchema }]),
     MongooseModule.forFeature([{ name: Account.name, schema: AccountSchema }]),
+    AuthModule,
     PassportModule,
     JwtModule.register({
       secret: jwtConstants.secret,

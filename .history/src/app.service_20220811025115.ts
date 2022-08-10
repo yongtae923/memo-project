@@ -50,8 +50,8 @@ export class AppService {
     return this.accountModel.find().exec();
   }
 
-  async accountOne(id: string): Promise<Account> {
-    return this.accountModel.findOne({ accountId: id }).exec();
+  async findOne(id: string): Promise<Memo> {
+    return this.memoModel.findOne({ _id: id }).exec();
   }
 
   async join(accountDto: AccountDto): Promise<Account> {

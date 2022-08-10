@@ -64,9 +64,7 @@ export class AppController {
   }
 
   @Post('auth/login')
-  async login(
-    @Body() accountDto: AccountDto,
-  ): Promise<{ access_token: string }> {
+  async login(@Body() accountDto: AccountDto): Promise<{ access_token: string }> {
     return this.authService.login(accountDto);
   }
 

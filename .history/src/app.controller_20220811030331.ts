@@ -59,15 +59,14 @@ export class AppController {
   }
 
   @Post('accounts')
-  async join(@Body() accountDto: AccountDto) {
-    return await this.appService.join(accountDto);
+  async join(@Body() postAccountDto: AccountDto) {
+    return await this.appService.join(postAccountDto);
   }
 
+  @UseGuards(LocalAuthGuard)
   @Post('auth/login')
-  async login(
-    @Body() accountDto: AccountDto,
-  ): Promise<{ access_token: string }> {
-    return this.authService.login(accountDto);
+  async login(@Request() req): Promise<{ access_token: string }> {
+    return this.authService.login(req.user);
   }
 
   @UseGuards(JwtAuthGuard)

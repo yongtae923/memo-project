@@ -50,7 +50,7 @@ export class AppService {
     return this.accountModel.find().exec();
   }
 
-  async accountOne(id: string): Promise<Account> {
+  async accountOne(id: string): Promise<Memo> {
     return this.accountModel.findOne({ accountId: id }).exec();
   }
 

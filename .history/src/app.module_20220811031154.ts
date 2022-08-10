@@ -18,6 +18,7 @@ import { LocalStrategy } from './auth/strategies/local.strategy';
     ),
     MongooseModule.forFeature([{ name: Memo.name, schema: MemoSchema }]),
     MongooseModule.forFeature([{ name: Account.name, schema: AccountSchema }]),
+    AuthModule,
     PassportModule,
     JwtModule.register({
       secret: jwtConstants.secret,

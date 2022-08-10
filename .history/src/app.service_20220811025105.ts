@@ -50,10 +50,6 @@ export class AppService {
     return this.accountModel.find().exec();
   }
 
-  async accountOne(id: string): Promise<Account> {
-    return this.accountModel.findOne({ accountId: id }).exec();
-  }
-
   async join(accountDto: AccountDto): Promise<Account> {
     const isExist = await this.accountModel.findOne({
       accountId: accountDto.accountId,

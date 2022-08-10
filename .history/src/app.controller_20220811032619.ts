@@ -64,10 +64,8 @@ export class AppController {
   }
 
   @Post('auth/login')
-  async login(
-    @Body() accountDto: AccountDto,
-  ): Promise<{ access_token: string }> {
-    return this.authService.login(accountDto);
+  async login(@Body() postAccountDto: AccountDto): Promise<{ access_token: string }> {
+    return this.authService.login(req.user);
   }
 
   @UseGuards(JwtAuthGuard)

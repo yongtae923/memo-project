@@ -16,12 +16,12 @@ import { AuthService } from './auth/auth.service';
 import { JwtAuthGuard } from './auth/guards/jwt-auth.guard';
 import { LocalAuthGuard } from './auth/guards/local-auth.guard';
 
+type NewType = AuthService;
+
 @Controller()
 export class AppController {
-  constructor(
-    private readonly appService: AppService,
-    private readonly authService: AuthService,
-  ) {}
+  constructor(private readonly appService: AppService) {}
+  constructor(private readonly authService: NewType) {}
 
   @Get()
   getHello(): string {
@@ -59,20 +59,19 @@ export class AppController {
   }
 
   @Post('accounts')
-  async join(@Body() accountDto: AccountDto) {
-    return await this.appService.join(accountDto);
+  async join(@Body() postAccountDto: AccountDto) {
+    return await this.appService.join(postAccountDto);
   }
 
+  @UseGuards(LocalAuthGuard)
   @Post('auth/login')
-  async login(
-    @Body() accountDto: AccountDto,
-  ): Promise<{ access_token: string }> {
-    return this.authService.login(accountDto);
+  async login(@Request() req) {
+    return this.authService.login(req.user);
   }
 
   @UseGuards(JwtAuthGuard)
   @Get('profile')
-  getProfile(@Request() req): any {
+  getProfile(@Request() req) {
     return req.user;
   }
 }
