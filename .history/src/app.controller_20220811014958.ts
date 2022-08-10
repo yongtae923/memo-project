@@ -46,7 +46,7 @@ export class AppController {
     return this.appService.delete(id);
   }
 
-  @Get('accounts')
+  @Get()
   async accounts() {
     return await this.appService.accounts();
   }

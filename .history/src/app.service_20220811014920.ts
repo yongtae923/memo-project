@@ -50,7 +50,7 @@ export class AppService {
 
   async join(accountDto: AccountDto): Promise<Account> {
     const isExist = await this.accountModel.findOne({
-      accountId: accountDto.accountId,
+      accountId: accountDto.id,
     });
 
     if (isExist) {

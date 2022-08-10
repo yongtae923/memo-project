@@ -1,4 +1,4 @@
 export class AccountDto {
-  readonly accountId: string;
+  readonly id: string;
   readonly password: string;
 }

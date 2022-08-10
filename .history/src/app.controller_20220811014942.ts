@@ -46,10 +46,8 @@ export class AppController {
     return this.appService.delete(id);
   }
 
-  @Get('accounts')
-  async accounts() {
-    return await this.appService.accounts();
-  }
+  @Get()
+  async accounts
 
   @Post('accounts')
   async join(@Body() postAccountDto: AccountDto) {

@@ -44,10 +44,6 @@ export class AppService {
     return deletedMemo;
   }
 
-  async accounts(): Promise<Account[]> {
-    return this.accountModel.find().exec();
-  }
-
   async join(accountDto: AccountDto): Promise<Account> {
     const isExist = await this.accountModel.findOne({
       accountId: accountDto.accountId,

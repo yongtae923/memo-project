@@ -1,4 +1,4 @@
-import { ForbiddenException, HttpStatus, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { MemoDto } from './dto/memo.dto';
@@ -44,24 +44,21 @@ export class AppService {
     return deletedMemo;
   }
 
-  async accounts(): Promise<Account[]> {
-    return this.accountModel.find().exec();
-  }
-
   async join(accountDto: AccountDto): Promise<Account> {
     const isExist = await this.accountModel.findOne({
-      accountId: accountDto.accountId,
+      userId: accountDto.id,
     });
-
     if (isExist) {
       throw new ForbiddenException({
         statusCode: HttpStatus.FORBIDDEN,
         message: [`이미 등록된 사용자입니다.`],
-        error: 'Forbidden',
-      });
+        error: 'Forbidden'
+      })
     }
 
-    const result = await this.accountModel.create(accountDto);
+    const { password, ...result } = await this.userRepository.save(createUserDto);
     return result;
+    const createdMemo = await this.accountModel.create(accountDto);
+    return createdMemo;
   }
 }

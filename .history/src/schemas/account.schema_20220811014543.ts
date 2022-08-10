@@ -6,9 +6,6 @@ export type AccountDocument = Account & Document;
 @Schema()
 export class Account {
   @Prop()
-  id: string;
-
-  @Prop()
   accountId: string;
 
   @Prop()

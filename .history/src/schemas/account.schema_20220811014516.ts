@@ -9,7 +9,7 @@ export class Account {
   id: string;
 
   @Prop()
-  accountId: string;
+  accountid: string;
 
   @Prop()
   password: string;
