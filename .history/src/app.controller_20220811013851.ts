@@ -48,6 +48,7 @@ export class AppController {
 
   @Post('accounts')
   async join(@Body() postAccountDto: AccountDto) {
+    const isExist = await this.userRepository.findOne({userId: createUserDto.userId});
     return await this.appService.join(postAccountDto);
   }
 }

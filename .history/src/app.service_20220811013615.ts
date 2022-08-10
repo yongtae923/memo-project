@@ -25,8 +25,8 @@ export class AppService {
     return this.memoModel.findOne({ _id: id }).exec();
   }
 
-  async create(memoDto: MemoDto): Promise<Memo> {
-    const createdMemo = await this.memoModel.create(memoDto);
+  async create(postMemoDto: MemoDto): Promise<Memo> {
+    const createdMemo = await this.memoModel.create(postMemoDto);
     return createdMemo;
   }
 
@@ -44,8 +44,8 @@ export class AppService {
     return deletedMemo;
   }
 
-  async join(accountDto: AccountDto): Promise<Account> {
-    const createdMemo = await this.accountModel.create(accountDto);
+  async join(postAccountDto: AccountDto): Promise<Account> {
+    const createdMemo = await this.accountModel.create(postAccountDto);
     return createdMemo;
   }
 }

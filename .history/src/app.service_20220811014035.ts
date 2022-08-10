@@ -44,8 +44,8 @@ export class AppService {
     return deletedMemo;
   }
 
-  async join(accountDto: AccountDto): Promise<Account> {
-    const createdMemo = await this.accountModel.create(accountDto);
+  async join(postAccountDto: AccountDto): Promise<Account> {
+    const createdMemo = await this.accountModel.create(postAccountDto);
     return createdMemo;
   }
 }

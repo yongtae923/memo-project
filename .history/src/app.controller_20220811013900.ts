@@ -9,7 +9,7 @@ import {
   Put,
 } from '@nestjs/common';
 import { Memo } from './schemas/memo.schema';
-import { MemoDto } from './dto/memo.dto';
+import { PostMemoDto } from './dto/memo.dto';
 import { AccountDto } from './dto/account.dto';
 
 @Controller()
@@ -32,12 +32,12 @@ export class AppController {
   }
 
   @Post('memos')
-  async create(@Body() postMemoDto: MemoDto) {
+  async create(@Body() postMemoDto: PostMemoDto) {
     return await this.appService.create(postMemoDto);
   }
 
   @Put('memos/:id')
-  async edit(@Param('id') id: string, @Body() postMemoDto: MemoDto) {
+  async edit(@Param('id') id: string, @Body() postMemoDto: PostMemoDto) {
     return await this.appService.edit(id, postMemoDto);
   }
 
