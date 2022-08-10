@@ -37,20 +37,18 @@ export class AppController {
   async findOne(@Param('id') id: string): Promise<Memo> {
     return this.appService.findOne(id);
   }
-
   @UseGuards(JwtAuthGuard)
+
   @Post('memos')
   async create(@Body() postMemoDto: MemoDto) {
     return await this.appService.create(postMemoDto);
   }
 
-  @UseGuards(JwtAuthGuard)
   @Put('memos/:id')
   async edit(@Param('id') id: string, @Body() postMemoDto: MemoDto) {
     return await this.appService.edit(id, postMemoDto);
   }
 
-  @UseGuards(JwtAuthGuard)
   @Delete('memos/:id')
   async delete(@Param('id') id: string) {
     return this.appService.delete(id);
@@ -71,5 +69,11 @@ export class AppController {
     @Body() accountDto: AccountDto,
   ): Promise<{ access_token: string }> {
     return this.authService.login(accountDto);
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Get('profile')
+  getProfile(@Request() req): any {
+    return req.user;
   }
 }

@@ -72,4 +72,10 @@ export class AppController {
   ): Promise<{ access_token: string }> {
     return this.authService.login(accountDto);
   }
+
+  @UseGuards(JwtAuthGuard)
+  @Get('profile')
+  getProfile(@Request() req): any {
+    return req.user;
+  }
 }
