@@ -63,9 +63,10 @@ export class AppService {
       });
     }
 
-    accountDto.password = createHash('sha512')
+    const hashPassword = createHash('sha512')
       .update(accountDto.password)
       .digest('hex');
+    accountDto.password = hashPassword;
 
     const result = await this.accountModel.create(accountDto);
     return result;

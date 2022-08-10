@@ -5,7 +5,7 @@ import { MemoDto } from './dto/memo.dto';
 import { AccountDto } from './dto/account.dto';
 import { Memo, MemoDocument } from './schemas/memo.schema';
 import { Account, AccountDocument } from './schemas/account.schema';
-import { createHash } from 'crypto';
+import crypto from 'crypto';
 
 @Injectable()
 export class AppService {
@@ -63,11 +63,13 @@ export class AppService {
       });
     }
 
-    accountDto.password = createHash('sha512')
+    const hashPassword = crypto
+      .createHash('sha512')
       .update(accountDto.password)
       .digest('hex');
+    accountDto.password = hashPassword;
 
-    const result = await this.accountModel.create(accountDto);
+    const result = await this.accountModel.create(accountd);
     return result;
   }
 }

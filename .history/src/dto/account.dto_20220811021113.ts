@@ -1,4 +1,5 @@
 export class AccountDto {
   readonly accountId: string;
-  password: string;
+  readonly password: string;
+  salt: string;
 }
