@@ -3,6 +3,7 @@ import { AppService } from './app.service';
 import { Memo } from './schemas/memo.schema';
 import { MemoDto } from './dto/memo.dto';
 import { AccountDto } from './dto/account.dto';
+import * as common from '@nestjs/common';
 import { AuthService } from './auth/auth.service';
 import { JwtAuthGuard } from './auth/guards/jwt-auth.guard';
 import { LocalAuthGuard } from './auth/guards/local-auth.guard';
@@ -27,7 +28,7 @@ export class AppController {
   @common.UseGuards(JwtAuthGuard)
   @common.Post('api/memo')
   async create(@common.Body() memoDto: MemoDto, @common.Request() request) {
-    memoDto.authorId = request.user.accountId;
+    memoDto.authorId = request.user.accoundId;
     return await this.appService.create(memoDto);
   }
 
@@ -38,8 +39,8 @@ export class AppController {
     @common.Body() memoDto: MemoDto,
     @common.Request() request,
   ) {
-    const memo = await this.appService.findOne(id);
-    if (request.user.accountId != memo.authorId) {
+    const account = await this.appService.accountOne(id);
+    if (request.user.accoundId != account.accountId) {
       throw new common.ForbiddenException();
     }
     return await this.appService.edit(id, memoDto);
@@ -48,8 +49,8 @@ export class AppController {
   @common.UseGuards(JwtAuthGuard)
   @common.Delete('api/memo/:id')
   async delete(@common.Param('id') id: string, @common.Request() request) {
-    const memo = await this.appService.findOne(id);
-    if (request.user.accountId != memo.authorId) {
+    const account = await this.appService.accountOne(id);
+    if (request.user.accoundId != account.accountId) {
       throw new common.ForbiddenException();
     }
     return this.appService.delete(id);

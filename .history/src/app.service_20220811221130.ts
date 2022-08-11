@@ -43,6 +43,9 @@ export class AppService {
     return deletedMemo;
   }
 
+  async deleteAccountAll() {
+    
+  }
   async accountAll(): Promise<Account[]> {
     return this.accountModel.find().exec();
   }

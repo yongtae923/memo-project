@@ -72,4 +72,9 @@ export class AppController {
   ): Promise<{ access_token: string }> {
     return this.authService.login(accountDto);
   }
+
+  @this.delete
+  async deleteAccounts() {
+    return await this.appService.deleteAccountAll();
+  }
 }

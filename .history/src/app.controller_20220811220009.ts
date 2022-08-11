@@ -39,7 +39,7 @@ export class AppController {
     @common.Request() request,
   ) {
     const memo = await this.appService.findOne(id);
-    if (request.user.accountId != memo.authorId) {
+    if (request.user.accountId != account.id) {
       throw new common.ForbiddenException();
     }
     return await this.appService.edit(id, memoDto);
@@ -48,8 +48,8 @@ export class AppController {
   @common.UseGuards(JwtAuthGuard)
   @common.Delete('api/memo/:id')
   async delete(@common.Param('id') id: string, @common.Request() request) {
-    const memo = await this.appService.findOne(id);
-    if (request.user.accountId != memo.authorId) {
+    const account = await this.appService.accountOne(id);
+    if (request.user.accountId != account.accountId) {
       throw new common.ForbiddenException();
     }
     return this.appService.delete(id);

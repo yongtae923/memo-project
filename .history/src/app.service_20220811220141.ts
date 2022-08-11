@@ -32,7 +32,7 @@ export class AppService {
     const updatedMemo = await this.memoModel
       .findByIdAndUpdate(id, postMemoDto)
       .exec();
-    updatedMemo.content = postMemoDto.content;
+    updatedMemo.authorId = postMemoDto.authorId;
     return updatedMemo;
   }
 

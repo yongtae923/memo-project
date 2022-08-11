@@ -1,8 +1,9 @@
-import * as common from '@nestjs/common';
-import { AppService } from './app.service';
+import * as common from '@nestjs/common';import { AppService } from './app.service';
+
 import { Memo } from './schemas/memo.schema';
 import { MemoDto } from './dto/memo.dto';
 import { AccountDto } from './dto/account.dto';
+import { UseGuards } from '@nestjs/common';
 import { AuthService } from './auth/auth.service';
 import { JwtAuthGuard } from './auth/guards/jwt-auth.guard';
 import { LocalAuthGuard } from './auth/guards/local-auth.guard';
@@ -24,32 +25,32 @@ export class AppController {
     return this.appService.findOne(id);
   }
 
-  @common.UseGuards(JwtAuthGuard)
+  @UseGuards(JwtAuthGuard)
   @common.Post('api/memo')
   async create(@common.Body() memoDto: MemoDto, @common.Request() request) {
-    memoDto.authorId = request.user.accountId;
+    memoDto.authorId = request.user.accoundId;
     return await this.appService.create(memoDto);
   }
 
-  @common.UseGuards(JwtAuthGuard)
+  @UseGuards(JwtAuthGuard)
   @common.Put('api/memo/:id')
   async edit(
     @common.Param('id') id: string,
     @common.Body() memoDto: MemoDto,
     @common.Request() request,
   ) {
-    const memo = await this.appService.findOne(id);
-    if (request.user.accountId != memo.authorId) {
+    const account = await this.appService.accountOne(id);
+    if (request.user.accoundId != account.accountId) {
       throw new common.ForbiddenException();
     }
     return await this.appService.edit(id, memoDto);
   }
 
-  @common.UseGuards(JwtAuthGuard)
+  @UseGuards(JwtAuthGuard)
   @common.Delete('api/memo/:id')
   async delete(@common.Param('id') id: string, @common.Request() request) {
-    const memo = await this.appService.findOne(id);
-    if (request.user.accountId != memo.authorId) {
+    const account = await this.appService.accountOne(id);
+    if (request.user.accoundId != account.accountId) {
       throw new common.ForbiddenException();
     }
     return this.appService.delete(id);
@@ -65,7 +66,7 @@ export class AppController {
     return await this.appService.join(accountDto);
   }
 
-  @common.UseGuards(LocalAuthGuard)
+  @UseGuards(LocalAuthGuard)
   @common.Post('api/auth/login')
   async login(
     @common.Body() accountDto: AccountDto,
