@@ -35,7 +35,7 @@ export class AuthService {
   }
 
   async login(accountDto: AccountDto) {
-    await this.validateUser(accountDto.accountId, accountDto.password);
+    await this.validateUser(accountDto.accountId, accountDto.password)
 
     const payload = {
       accountId: accountDto.accountId,

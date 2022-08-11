@@ -1,4 +1,8 @@
-import { ForbiddenException, HttpStatus, Injectable } from '@nestjs/common';
+import {
+  ForbiddenException,
+  HttpStatus,
+  Injectable,
+} from '@nestjs/common';
 import { AppService } from '../app.service';
 import { JwtService } from '@nestjs/jwt';
 import { createHash } from 'crypto';
@@ -35,8 +39,6 @@ export class AuthService {
   }
 
   async login(accountDto: AccountDto) {
-    await this.validateUser(accountDto.accountId, accountDto.password);
-
     const payload = {
       accountId: accountDto.accountId,
       password: accountDto.password,

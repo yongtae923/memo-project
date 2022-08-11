@@ -1,4 +1,4 @@
-import { ForbiddenException, HttpStatus, Injectable } from '@nestjs/common';
+import { ForbiddenException, HttpStatus, Injectable, UnauthorizedException } from '@nestjs/common';
 import { AppService } from '../app.service';
 import { JwtService } from '@nestjs/jwt';
 import { createHash } from 'crypto';
@@ -11,32 +11,27 @@ export class AuthService {
     private readonly jwtService: JwtService,
   ) {}
 
-  async validateUser(accountId: string, pass: string): Promise<any> {
+  async validateUser(accountId: string, pass: string): Promise<boolean> {
     const user = await this.appService.accountOne(accountId);
 
     if (!user) {
-      throw new ForbiddenException({
-        statusCode: HttpStatus.FORBIDDEN,
-        message: [`사용자 정보가 일치하지 않습니다.`],
-        error: 'Forbidden',
-      });
+      throw new ForbiddenException();
     }
 
     const hash = createHash('sha512').update(pass).digest('hex');
     if (user.password != hash) {
-      throw new ForbiddenException({
-        statusCode: HttpStatus.FORBIDDEN,
-        message: [`사용자 정보가 일치하지 않습니다.`],
-        error: 'Forbidden',
-      });
+      throw new 
     }
-
-    return user;
   }
 
   async login(accountDto: AccountDto) {
-    await this.validateUser(accountDto.accountId, accountDto.password);
-
+    if (await this.validateUser(accountDto.accountId, accountDto.password)) {
+      throw new UnauthorizedException({
+        statusCode: HttpStatus.UNAUTHORIZED,
+        message: [`등록되지 않은 사용자입니다.`],
+        error: 'Unauthorized',
+      });
+    }
     const payload = {
       accountId: accountDto.accountId,
       password: accountDto.password,
